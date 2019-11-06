@@ -1,0 +1,27 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:UWCDemo"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             mc:Ignorable="d"
+             x:Class="UWCDemo.JokePage">
+
+    <d:ContentPage.BindingContext>
+        <local:Joke Id="1"
+                    JokeText="What type of music do balloons hate? Pop music!" />
+    </d:ContentPage.BindingContext>
+
+    <StackLayout>
+
+        <Label Text="{Binding JokeText}"
+               Margin="36"
+               FontSize="24"
+               HorizontalTextAlignment="Center" />
+
+        <skia:SKCanvasView PaintSurface="OnPaintSurface"
+                           VerticalOptions="FillAndExpand" />
+
+    </StackLayout>
+
+</ContentPage>

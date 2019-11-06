@@ -21,7 +21,7 @@ namespace UWCDemo
         {
             if (e.CurrentSelection.FirstOrDefault() is Joke joke)
             {
-                await Navigation.PushAsync(new ContentPage());
+                await Navigation.PushAsync(new JokePage(joke));
 
                 ((CollectionView)sender).SelectedItem = null;
             }
