@@ -54,14 +54,14 @@ namespace UWCDemo
 
 		public async Task<IEnumerable<Joke>> GetCloudJokesAsync(int page, int limit)
 		{
-			// try the cloud
+            // try the cloud
 			var cloudJokes = await client.SearchJokesAsync(page: page + 1, limit: limit);
 
 			// convert the cloud jokes into our jokes
 			var jokes = cloudJokes.Results.Select(r => new Joke
 			{
-				Id = r.Id,
-				JokeText = r.Joke
+                Id = r.Id,
+                JokeText = r.Joke
 			}).ToArray();
 
 			return jokes;
@@ -75,7 +75,7 @@ namespace UWCDemo
 			var jokes = await db.Table<Joke>()
 				.Skip(page * limit)
 				.Take(limit)
-				.ToArrayAsync();
+			    ToArrayAsync();
 
             // return from the database
             if (jokes?.Length > 0)
