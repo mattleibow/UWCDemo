@@ -1,0 +1,39 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:UWCDemo"
+             mc:Ignorable="d"
+             x:Class="UWCDemo.MainPage"
+             Title="Dad Jokes">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reset" Order="Secondary"
+                     Command="{Binding ResetCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <CollectionView ItemsSource="{Binding Jokes}"
+                    SelectionChanged="OnJokeSelected"
+                    SelectionMode="Single"
+                    RemainingItemsThreshold="3"
+                    RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="20,10">
+                    <Label Text="{Binding JokeText}" LineBreakMode="WordWrap" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyView>
+            <Grid>
+                <Label Text="Loading dad jokes..." FontSize="20"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Grid>
+        </CollectionView.EmptyView>
+    </CollectionView>
+
+</ContentPage>
