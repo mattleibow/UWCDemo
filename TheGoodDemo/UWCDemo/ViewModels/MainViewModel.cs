@@ -1,5 +1,5 @@
-﻿using MvvmHelpers;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using MvvmHelpers;
 using Xamarin.Forms;
 
 namespace UWCDemo
