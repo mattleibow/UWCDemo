@@ -33,7 +33,7 @@ namespace UWCDemo
 
             // try local db
             var localJokes = await GetLocalJokesAsync(page, PageLimit);
-            if (localJokes != null)
+            if (localJokes == null)
                 return localJokes;
 
             // try the cloud
