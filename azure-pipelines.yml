@@ -10,11 +10,13 @@ steps:
   inputs:
     solution: 'TheGoodDemo\UWCDemo.sln'
     maximumCpuCount: true
+    restoreNugetPackages: true
 - task: MSBuild@1
   displayName: 'Build the bad demo'
   inputs:
     solution: 'TheBadDemo\UWCDemo.sln'
     maximumCpuCount: true
+    restoreNugetPackages: true
 - task: DotNetCoreCLI@2
   displayName: 'Run the tests'
   inputs:
