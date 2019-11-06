@@ -13,13 +13,13 @@ namespace UWCDemo
         private const int PageLimit = 20;
 
         private readonly SQLiteAsyncConnection db;
-        private readonly Task init;
+    	private readonly Task init;
         private readonly DadJokeClient client;
 
         public DadJokesService()
         {
-            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "jokes.db");
-            db = new SQLiteAsyncConnection(dbPath);
+			var dbPath = Path.Combine(FileSystem.AppDataDirectory, "jokes.db");
+			db = new SQLiteAsyncConnection(dbPath);
 
             init = Task.WhenAll(db.CreateTableAsync<Joke>());
 
@@ -52,30 +52,30 @@ namespace UWCDemo
             return cloudJokes;
         }
 
-        public async Task<IEnumerable<Joke>> GetCloudJokesAsync(int page, int limit)
-        {
-            // try the cloud
-            var cloudJokes = await client.SearchJokesAsync(page: page + 1, limit: limit);
+		public async Task<IEnumerable<Joke>> GetCloudJokesAsync(int page, int limit)
+		{
+			// try the cloud
+			var cloudJokes = await client.SearchJokesAsync(page: page + 1, limit: limit);
 
-            // convert the cloud jokes into our jokes
-            var jokes = cloudJokes.Results.Select(r => new Joke
-            {
-                Id = r.Id,
-                JokeText = r.Joke
-            }).ToArray();
+			// convert the cloud jokes into our jokes
+			var jokes = cloudJokes.Results.Select(r => new Joke
+			{
+				Id = r.Id,
+				JokeText = r.Joke
+			}).ToArray();
 
-            return jokes;
-        }
+			return jokes;
+		}
 
         public async Task<IEnumerable<Joke>> GetLocalJokesAsync(int page, int limit)
         {
             await init;
 
-            // try the database
-            var jokes = await db.Table<Joke>()
-                .Skip(page * limit)
-                .Take(limit)
-                .ToArrayAsync();
+			// try the database
+			var jokes = await db.Table<Joke>()
+				.Skip(page * limit)
+				.Take(limit)
+				.ToArrayAsync();
 
             // return from the database
             if (jokes?.Length > 0)
