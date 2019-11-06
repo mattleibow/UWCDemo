@@ -75,7 +75,7 @@ namespace UWCDemo
 			var jokes = await db.Table<Joke>()
 				.Skip(page * limit)
 				.Take(limit)
-			    ToArrayAsync();
+			    .ToArrayAsync();
 
             // return from the database
             if (jokes?.Length > 0)
