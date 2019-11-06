@@ -1,0 +1,22 @@
+trigger:
+- master
+
+pool:
+  name: 'Hosted Windows 2019 with VS2019'
+
+steps:
+- task: MSBuild@1
+  displayName: 'Build the good demo'
+  inputs:
+    solution: 'TheGoodDemo\UWCDemo.sln'
+    maximumCpuCount: true
+- task: MSBuild@1
+  displayName: 'Build the bad demo'
+  inputs:
+    solution: 'TheBadDemo\UWCDemo.sln'
+    maximumCpuCount: true
+- task: DotNetCoreCLI@2
+  displayName: 'Run the tests'
+  inputs:
+    command: 'test'
+    projects: 'TheGoodDemo\UWCDemo.Tests\UWCDemo.Tests.csproj'
