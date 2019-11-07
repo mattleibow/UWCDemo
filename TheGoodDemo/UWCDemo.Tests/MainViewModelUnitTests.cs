@@ -1,7 +1,7 @@
-using NSubstitute;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NSubstitute;
 using Xunit;
 
 namespace UWCDemo.Tests
