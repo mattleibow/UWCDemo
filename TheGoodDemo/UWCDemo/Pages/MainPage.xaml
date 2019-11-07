@@ -11,6 +11,11 @@
         <local:MainViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reset" Order="Secondary"
+                     Command="{Binding ResetCommand}" />
+    </ContentPage.ToolbarItems>
+
     <CollectionView ItemsSource="{Binding Jokes}"
                     SelectionChanged="OnJokeSelected"
                     SelectionMode="Single"

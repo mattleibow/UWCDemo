@@ -34,5 +34,11 @@ namespace UWCDemo
             // return the cloud jokes
             return cloudJokes;
         }
+
+        public async Task ResetAsync()
+        {
+            // clean out the db
+            await DbJokes.ResetAsync();
+        }
     }
 }

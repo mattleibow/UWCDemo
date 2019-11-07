@@ -8,5 +8,7 @@ namespace UWCDemo
         Task<IEnumerable<Joke>> GetJokesAsync(int page, int limit);
 
         Task SaveJokesAsync(IEnumerable<Joke> cloudJokes);
+
+        Task ResetAsync();
     }
 }

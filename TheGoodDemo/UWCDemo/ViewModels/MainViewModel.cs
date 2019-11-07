@@ -21,11 +21,14 @@ namespace UWCDemo
             service = new DadJokesService(httpJokes, dbJokes);
 
             LoadMoreItemsCommand = new Command(OnLoadMoreItems);
+            ResetCommand = new Command(OnReset);
 
             Jokes = new ObservableRangeCollection<Joke>();
         }
 
         public ICommand LoadMoreItemsCommand { get; }
+
+        public ICommand ResetCommand { get; }
 
         public ObservableRangeCollection<Joke> Jokes { get; }
 
@@ -50,6 +53,13 @@ namespace UWCDemo
 
             // all done
             IsLoadingJokes = false;
+        }
+
+        private async void OnReset()
+        {
+            // clear everything
+            Jokes.Clear();
+            await service.ResetAsync();
         }
     }
 }
