@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:cp="clr-namespace:Spillman.Xamarin.Forms.ColorPicker;assembly=Spillman.Xamarin.Forms.ColorPicker"
+             mc:Ignorable="d"
+             x:Class="SkiaSharpDemo.MainPage">
+    <StackLayout>
+        <Button Text="Colour" Clicked="OnColorPickerClicked" />
+        <Grid VerticalOptions="FillAndExpand">
+            <skia:SKCanvasView x:Name="skiaView"
+                       PaintSurface="OnPaint"
+                       Touch="OnTouch"
+                       EnableTouchEvents="True" />
+            <cp:ColorPickerView x:Name="colorPickerView"
+                                IsVisible="False" />
+        </Grid>
+    </StackLayout>
+</ContentPage>
