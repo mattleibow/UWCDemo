@@ -52,20 +52,20 @@ namespace UWCDemo
             return cloudJokes;
         }
 
-		public async Task<IEnumerable<Joke>> GetCloudJokesAsync(int page, int limit)
-		{
+        public async Task<IEnumerable<Joke>> GetCloudJokesAsync(int page, int limit)
+        {
             // try the cloud
-			var cloudJokes = await client.SearchJokesAsync(page: page + 1, limit: limit);
+            var results = await client.SearchJokesAsync(page: page + 1, limit: limit);
 
-			// convert the cloud jokes into our jokes
-			var jokes = cloudJokes.Results.Select(r => new Joke
-			{
+            // convert the cloud jokes into our jokes
+            var jokes = results.Results.Select(r => new Joke
+            {
                 Id = r.Id,
                 JokeText = r.Joke
-			}).ToArray();
+            }).ToArray();
 
-			return jokes;
-		}
+            return jokes;
+        }
 
         public async Task<IEnumerable<Joke>> GetLocalJokesAsync(int page, int limit)
         {
