@@ -202,5 +202,50 @@ namespace UWCDemo.Tests
                     Arg.Is<IEnumerable<Joke>>(jokes => jokes.Single() == cloudJoke));
             }
         }
+
+        public class ResetCommand
+        {
+            [Fact]
+            public void ResetsDatabase()
+            {
+                // create a useless cloud
+                var httpJokes = Substitute.For<IHttpJokes>();
+
+                // create a magical database
+                var dbJokes = Substitute.For<IDbJokes>();
+
+                // pretend we are a page
+                var vm = new MainViewModel(httpJokes, dbJokes);
+
+                // get some jokes
+                vm.ResetCommand.Execute(null);
+
+                // make sure we we asked to clean the db
+                dbJokes.ReceivedWithAnyArgs().ResetAsync();
+            }
+
+            [Fact]
+            public void ResetsJokesCollection()
+            {
+                // create a test joke
+                var joke = new Joke { Id = "1", JokeText = "joke text" };
+
+                // create useless things
+                var httpJokes = Substitute.For<IHttpJokes>();
+                var dbJokes = Substitute.For<IDbJokes>();
+
+                // pretend we are a page
+                var vm = new MainViewModel(httpJokes, dbJokes);
+
+                // add some dummy joke
+                vm.Jokes.Add(joke);
+
+                // get some jokes
+                vm.ResetCommand.Execute(null);
+
+                // make sure we we asked to clean the db
+                Assert.Empty(vm.Jokes);
+            }
+        }
     }
 }

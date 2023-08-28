@@ -50,5 +50,13 @@ namespace UWCDemo
                 }
             });
         }
+
+        public async Task ResetAsync()
+        {
+            await init;
+
+            // just clear everything out
+            await db.DeleteAllAsync<Joke>();
+        }
     }
 }
